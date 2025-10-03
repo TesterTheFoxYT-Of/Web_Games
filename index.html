@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>🎮 Web-Port Launcher</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #1e1e2e;
+      color: #fff;
+    }
+    #sidebar {
+      width: 250px;
+      background: #2a2a3c;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    #sidebar h2 { font-size: 20px; margin-bottom: 10px; }
+    .game-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #3a3a4f;
+      border: none;
+      color: #fff;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+    .game-btn:hover { background: #50506a; }
+    #main { flex: 1; display: flex; flex-direction: column; background: #111; }
+    #topbar { background: #222; padding: 10px; font-size: 14px; color: #aaa; }
+    iframe { flex: 1; border: none; }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <h2>Игры</h2>
+  </div>
+
+  <div id="main">
+    <div id="topbar">Выберите игру слева</div>
+    <iframe id="gameFrame"></iframe>
+  </div>
+
+  <script>
+    // Полный список игр с оригинальными названиями папок
+    const games = [
+      { folder: 'amanda-the-adventurer', label: 'amanda-the-adventurer' },
+      { folder: 'andys-apple-farm', label: 'andys-apple-farm' },
+      { folder: 'baldi-plus', label: 'baldi-plus' },
+      { folder: 'baldi-remaster', label: 'baldi-remaster' },
+      { folder: 'bendy', label: 'bendy' },
+      { folder: 'bergentruck', label: 'bergentruck' },
+      { folder: 'bloodmoney', label: 'bloodmoney' },
+      { folder: 'buckshot-roulette', label: 'buckshot-roulette' },
+      { folder: 'class-of-09', label: 'class-of-09' },
+      { folder: 'cuphead', label: 'cuphead' },
+      { folder: 'dead-plate', label: 'dead-plate' },
+      { folder: 'deadseat', label: 'deadseat' },
+      { folder: 'donottakethiscathome', label: 'donottakethiscathome' },
+      { folder: 'fears-to-fathom', label: 'fears-to-fathom' },
+      { folder: 'happy-sheepies', label: 'happy-sheepies' },
+      { folder: 'hotline-miami', label: 'hotline-miami' },
+      { folder: 'human-expenditure-program', label: 'human-expenditure-program' },
+      { folder: 'jelly-drift', label: 'jelly-drift' },
+      { folder: 'karlson', label: 'karlson' },
+      { folder: 'kindergarten', label: 'kindergarten' },
+      { folder: 'lacysflashgames', label: 'lacysflashgames' },
+      { folder: 'milkman-karlson', label: 'milkman-karlson' },
+      { folder: 'omori-fixed', label: 'omori-fixed' },
+      { folder: 'people-playground', label: 'people-playground' },
+      { folder: 'pizza-tower', label: 'pizza-tower' },
+      { folder: 'raft', label: 'raft' },
+      { folder: 'repo', label: 'repo' },
+      { folder: 'slender', label: 'slender' },
+      { folder: 'speed-stars', label: 'speed-stars' },
+      { folder: 'thats-not-my-neighbor', label: 'thats-not-my-neighbor' },
+      { folder: 'the-man-in-the-window', label: 'the-man-in-the-window' },
+      { folder: 'ultrakill', label: 'ultrakill' },
+      { folder: 'undertale-yellow', label: 'undertale-yellow' },
+      { folder: 'web-fishing', label: 'web-fishing' },
+      { folder: 'yume-nikki', label: 'yume-nikki' },
+    ];
+
+    const sidebar = document.getElementById('sidebar');
+    const iframe = document.getElementById('gameFrame');
+    const topbar = document.getElementById('topbar');
+
+    games.forEach(game => {
+      const btn = document.createElement('button');
+      btn.className = 'game-btn';
+      btn.textContent = game.label;
+      btn.onclick = () => {
+        iframe.src = `./${game.folder}/index.html`;
+        topbar.textContent = `Запущена игра: ${game.label}`;
+      };
+      sidebar.appendChild(btn);
+    });
+  </script>
+</body>
+</html>
